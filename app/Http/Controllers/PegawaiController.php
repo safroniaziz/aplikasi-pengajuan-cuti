@@ -15,6 +15,6 @@ class PegawaiController extends Controller
 
     public function show(Pegawai $pegawai){
         $cutis = $pegawai->cutis()->get();
-        return $cutis;
+        return view('admin/pegawais.show',compact('cutis','pegawai'));
     }
 }
