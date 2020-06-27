@@ -25,6 +25,13 @@ Route::group(['prefix'  =>  'admin'], function(){
     Route::get('/dashboard','AdminDashboardController@index')->name('admin.dashboard');
 });
 
+Route::group(['prefix'  =>  'admin/pegawais'], function(){
+    Route::get('/','PegawaiController@index')->name('admin.pegawais');
+    Route::get('/detail/{pegawai:slug}','PegawaiController@show')->name('admin.pegawais.show');
+});
+
 Route::group(['prefix'  =>  'admin/pengajuans'], function(){
     Route::get('/','AdminPengajuanController@index')->name('admin.pengajuans');
+    Route::patch('/verifikasi','AdminPengajuanController@verifikasi')->name('admin.pengajuans.verifikasi');
+    Route::patch('/detail/{pegawais:slug}','AdminPengajuanController@show')->name('admin.pengajuans.show');
 });

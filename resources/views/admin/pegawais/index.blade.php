@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Jabatan')
-@section('login_as', 'Administrator')
+@section('login_as', 'Admin Universitas')
 @section('user-login')
     @if (Auth::check())
     {{ Auth::user()->nm_user }}
@@ -61,19 +61,19 @@
                             @php
                                 $no=1;
                             @endphp
-                            @foreach ($ajuans as $ajuan)
+                            @foreach ($pegawais as $pegawai)
                                 <tr>
                                     <td> {{ $no++ }} </td>
-                                    <td> {{ $ajuan->nm_pegawai }} </td>
-                                    <td> {{ $ajuan->nip }} </td>
-                                    <td> {{ $ajuan->jenis_kelamin = '1' ? 'Laki-Laki' : 'Perempuan' }} </td>
-                                    <td> {{ $ajuan->jabatan }} </td>
-                                    <td> {{ $ajuan->departemen }} </td>
-                                    <td> {{ $ajuan->level_departemen }} </td>
-                                    <td> {{ $ajuan->cabang }} </td>
-                                    <td> {{ $ajuan->jenis_kepegawaian }} </td>
+                                    <td> {{ $pegawai->nm_pegawai }} </td>
+                                    <td> {{ $pegawai->nip }} </td>
+                                    <td> {{ $pegawai->jenis_kelamin = '1' ? 'Laki-Laki' : 'Perempuan' }} </td>
+                                    <td> {{ $pegawai->jabatan }} </td>
+                                    <td> {{ $pegawai->departemen }} </td>
+                                    <td> {{ $pegawai->level_departemen }} </td>
+                                    <td> {{ $pegawai->cabang }} </td>
+                                    <td> {{ $pegawai->jenis_kepegawaian }} </td>
                                     <td style="text-align: center">
-                                        <a href="{{ route('admin.pengajuans.show',[$ajuan->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
+                                        <a href="{{ route('admin.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

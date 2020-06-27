@@ -9,6 +9,7 @@ class Pegawai extends Model
     protected $fillable = [
         'nip',
         'nm_pegawai',
+        'slug',
         'jenis_kelamin',
         'departemen',
         'level_departemen',
@@ -17,6 +18,11 @@ class Pegawai extends Model
         'jenis_kepegawaian',
     ];
     public function cutis(){
-        return $this->belongsToMany(Cuti::class);
+        return $this->belongsToMany(Cuti::class)->withPivot('tanggal_awal','tanggal_akhir','keterangan','file_ajuan','status')->withTimestamps();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

@@ -3,5 +3,5 @@
 </li>
 
 <li>
-    <a href=" {{ route('admin.pengajuans') }} "><i class="fa fa-clock-o"></i>Daftar Ajuan Cuti</a>
+    <a href=" {{ route('admin.pegawais') }} "><i class="fa fa-users"></i>Daftar Pegawai Terdaftar</a>
 </li>

@@ -9,6 +9,7 @@ $factory->define(Pegawai::class, function (Faker $faker) {
     return [
         'nip'   =>  $faker->creditCardNumber,
         'nm_pegawai'    =>  $faker->name,
+        'slug'  =>  Str::slug($faker->name),
         'jenis_kelamin'    =>  $faker->randomElement(['1','2']),
         'departemen'    =>  $faker->name,
         'level_departemen'    =>  $faker->name,

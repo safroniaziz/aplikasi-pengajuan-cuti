@@ -8,5 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Cuti::class, function (Faker $faker) {
     return [
         'jenis_cuti'    =>  $faker->name,
+        'slug'  =>  Str::slug($faker->name),
     ];
 });

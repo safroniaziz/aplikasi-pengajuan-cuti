@@ -16,6 +16,7 @@ class CreateCutisTable extends Migration
         Schema::create('cutis', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_cuti');
+            $table->string('slug');
             $table->timestamps();
         });
     }

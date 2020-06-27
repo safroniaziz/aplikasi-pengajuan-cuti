@@ -17,6 +17,7 @@ class CreatePegawaisTable extends Migration
             $table->id();
             $table->string('nip');
             $table->string('nm_pegawai');
+            $table->string('slug');
             $table->enum('jenis_kelamin',['1','0']);
             $table->string('jabatan');
             $table->string('departemen');
