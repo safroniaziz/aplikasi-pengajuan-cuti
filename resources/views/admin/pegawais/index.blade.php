@@ -79,7 +79,7 @@
                                         <a href="{{ route('admin.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm pr-3 pl-3" style="color:white;cursor:pointer;"><i class="fa fa-info"></i></a>
                                     </td>
                                     <td>
-                                        <a href="{{  }}" class="btn btn-sm btn-info text-white" style="cursor: pointer;"> <i class="fa fa-edit"></i>&nbsp;</a>
+                                        <a href="" class="btn btn-sm btn-info text-white" style="cursor: pointer;"> <i class="fa fa-edit"></i>&nbsp;</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -100,21 +100,20 @@
         } );
 
 
-        function tambah(){
-            $('#form-pegawai').show(300);
-            $('#id').val("");
-            $('#nm_pegawai').val("");
-            $('#nip').val("");
-            $('#jenis_kelamin').val("");
-            $('#jabatan').val("");
-            $('#level_departemen').val("");
-            $('#cabang').val("");
-            $('#jenis_kepegawaian').val("");
-            (['#jenis_kelamin','jenis_kepegawaian']).find('option[selected="selected"]').each(function(){
-                $(this).prop('selected', true);
-            });
-        }
-
+        // function tambah(){
+        //     $('#form-pegawai').show(300);
+        //     $('#id').val("");
+        //     $('#nm_pegawai').val("");
+        //     $('#nip').val("");
+        //     $('#jenis_kelamin').val("");
+        //     $('#jabatan').val("");
+        //     $('#level_departemen').val("");
+        //     $('#cabang').val("");
+        //     $('#jenis_kepegawaian').val("");
+        //     (['#jenis_kelamin','jenis_kepegawaian']).find('option[selected="selected"]').each(function(){
+        //         $(this).prop('selected', true);
+        //     });
+        // }
 
         // function batalkan(){
         //     $('#form-pegawai').hide(300);
