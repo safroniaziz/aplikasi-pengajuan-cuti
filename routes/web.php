@@ -30,8 +30,21 @@ Route::group(['prefix'  =>  'admin/pegawais'], function(){
     Route::get('/detail/{pegawai:slug}','PegawaiController@show')->name('admin.pegawais.show');
     Route::get('/add','PegawaiController@add')->name('admin.pegawais.add');
     Route::post('/','PegawaiController@post')->name('admin.pegawais.post');
-    Route::get('/{id}/edit','PegawaiController@edit')->name('admin.pegawais.edit');
+    Route::get('/{pegawai:slug}/edit','PegawaiController@edit')->name('admin.pegawais.edit');
+    Route::patch('/{pegawai:slug}/update','PegawaiController@update')->name('admin.pegawais.update');
+    Route::delete('/{pegawai:slug}/delete','PegawaiController@delete')->name('admin.pegawais.delete');
 });
+
+Route::group(['prefix'  =>  'admin/operators'], function(){
+    Route::get('/','OperatorFakultasController@index')->name('admin.operators');
+    Route::get('/detail/{pegawai:slug}','OperatorFakultasController@show')->name('admin.operators.show');
+    Route::get('/add','OperatorFakultasController@add')->name('admin.operators.add');
+    Route::post('/','OperatorFakultasController@post')->name('admin.operators.post');
+    Route::get('/{pegawai:slug}/edit','OperatorFakultasController@edit')->name('admin.operators.edit');
+    Route::patch('/{pegawai:slug}/update','OperatorFakultasController@update')->name('admin.operators.update');
+    Route::delete('/{pegawai:slug}/delete','OperatorFakultasController@delete')->name('admin.operators.delete');
+});
+
 Route::group(['prefix'  =>  'operator'], function(){
     Route::get('/dashboard','OperatorDashboardController@index')->name('operator.dashboard');
 });

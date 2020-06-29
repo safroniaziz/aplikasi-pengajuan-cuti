@@ -35,34 +35,52 @@
                                 {{ $pegawai->nm_pegawai }}
                             </h5>
                             <ul class="list-unstyled user_data">
-                                <li class="text-uppercase">
-                                    <i class="fa fa-user user-profile-icon"></i>&nbsp;Nip : {{ $pegawai->nip }}
-                                </li>
-                                <li class="text-uppercase">
-                                    <i class="fa fa-briefcase user-profile-icon"></i>&nbsp;Jabatan : {{ $pegawai->jabatan }}
-                                </li>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td class="text-uppercase">
+                                            <i class="fa fa-user user-profile-icon"></i>&nbsp;Nip : {{ $pegawai->nip }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-uppercase">
+                                            <i class="fa fa-briefcase user-profile-icon"></i>&nbsp;Jabatan : {{ $pegawai->jabatan }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-uppercase">
+                                            <i class="fa {{ $pegawai->jenis_kelamin == '1' ? 'fa-male' : 'fa-female' }} user-profile-icon"></i>&nbsp;Jenis Kelamin {{ $pegawai->jenis_kelamin == '1' ? 'Laki-Laki' : 'Perempuan' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-uppercase">
+                                            <i class="fa fa-university user-profile-icon"></i>&nbsp;Departemen : {{ $pegawai->departemen }}
+                                        </td>
+                                    </tr>
 
-                                <li class="text-uppercase">
-                                    <i class="fa {{ $pegawai->jenis_kelamin == '1' ? 'fa-male' : 'fa-female' }} user-profile-icon"></i>&nbsp;Jenis Kelamin {{ $pegawai->jenis_kelamin == '1' ? 'Laki-Laki' : 'Perempuan' }}
-                                </li>
-    
-                                <li class="text-uppercase">
-                                    <i class="fa fa-university user-profile-icon"></i>&nbsp;Departemen : {{ $pegawai->departemen }}
-                                </li>
-
-                                <li class="text-uppercase">
-                                    <i class="fa fa-info user-profile-icon"></i>&nbsp;Jenis Kepegawaian : @if ($pegawai->jenis_kepegawaian == "tendik_pns")
-                                        <a class="text-uppercase">tendik pns</a>
-                                        @elseif ($pegawai->jenis_kepegawaian == "tendik_non_pns") {
-                                            <a class="tex">tendik non pns</a>
-                                        }
-                                        @else 
-                                        <a class="tex">{{ $pegawai->jenis_kepegawaian }}</a>
-                                    @endif
-                                </li>
+                                    <tr>
+                                        <td class="text-uppercase">
+                                            <i class="fa fa-info user-profile-icon"></i>&nbsp;Jenis Kepegawaian : @if ($pegawai->jenis_kepegawaian == "tendik_pns")
+                                                <a class="text-uppercase">tendik pns</a>
+                                                @elseif ($pegawai->jenis_kepegawaian == "tendik_non_pns") {
+                                                    <a class="tex">tendik non pns</a>
+                                                }
+                                                @else 
+                                                <a class="tex">{{ $pegawai->jenis_kepegawaian }}</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalkonfirmasi">
+                                                <i class="fa fa-trash"></i>&nbsp; Hapus Data Pegawai
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
                             </ul>
                         </div>
                     </div>
+                    @include('modal_alert')
                 </div>
             </section>
         </div>
