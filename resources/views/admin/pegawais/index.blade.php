@@ -133,7 +133,6 @@
 
         function edit(id){
             $.ajax({
-                var url = '{{ route("admin.edit_school", ":slug") }}';
                 url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
                 type: "GET",
                 dataType: "JSON",
