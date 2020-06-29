@@ -18,7 +18,7 @@ class Pegawai extends Model
         'jenis_kepegawaian',
     ];
     public function cutis(){
-        return $this->belongsToMany(Cuti::class)->withPivot('tanggal_awal','tanggal_akhir','keterangan','file_ajuan','status')->withTimestamps();
+        return $this->belongsToMany(Cuti::class)->withPivot('id','tanggal_awal','tanggal_akhir','keterangan','file_ajuan','status')->withTimestamps();
     }
 
     public function getRouteKeyName()
