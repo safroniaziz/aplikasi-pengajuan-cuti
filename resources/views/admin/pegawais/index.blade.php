@@ -40,15 +40,7 @@
                 </div>
                 
                 <div class="col-md-12">
-                    <a onclick="tambah()" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Jabatan</a>
-                </div>
-                
-                <div class="col-md-12">
-                    @csrf
-                    <form action="{{ route('admin.pegawais.post') }}" method="POST">
-                        @csrf
-                        @include('admin/pegawais.form')
-                    </form>
+                    <a href="{{ route('admin.pegawais.add') }}" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Data Pegawai</a>
                 </div>
 
                 <div class="col-md-12">
@@ -87,7 +79,7 @@
                                         <a href="{{ route('admin.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm pr-3 pl-3" style="color:white;cursor:pointer;"><i class="fa fa-info"></i></a>
                                     </td>
                                     <td>
-                                        <a onclick="edit({{ $pegawai->id }})" class="btn btn-sm btn-info text-white" style="cursor: pointer;"> <i class="fa fa-edit"></i>&nbsp;</a>
+                                        <a href="{{  }}" class="btn btn-sm btn-info text-white" style="cursor: pointer;"> <i class="fa fa-edit"></i>&nbsp;</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -123,37 +115,38 @@
             });
         }
 
-        function batalkan(){
-            $('#form-pegawai').hide(300);
-        }
-        
-        function verifikasi(id){
-            $('#modalverifikasi').modal('show');
-            $('#id_hapus').val(id);
-        }
 
-        function edit(id){
-            $.ajax({
-                url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                    $('#form-pegawai').show(300);
-                    $('#button-tambah').hide();
-                    $('#id').val(data.id);
-                    $('#nm_pegawai').val(data.nm_pegawai);
-                    $('#nip').val(data.nip);
-                    $('#jenis_kelamin').val(data.jenis_kelamin);
-                    $('#jabatan').val(data.jabatan);
-                    $('#level_departemen').val(data.level_departemen);
-                    $('#cabang').val(data.cabang);
-                    $('#jenis_kepegawaian').val(data.jenis_kepegawaian);
-                },
-                error:function(){
-                    alert("Nothing Data");
-                }
-            });
-        }
+        // function batalkan(){
+        //     $('#form-pegawai').hide(300);
+        // }
+        
+        // function verifikasi(id){
+        //     $('#modalverifikasi').modal('show');
+        //     $('#id_hapus').val(id);
+        // }
+
+        // function edit(id){
+        //     $.ajax({
+        //         url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
+        //         type: "GET",
+        //         dataType: "JSON",
+        //         success: function(data){
+        //             $('#form-pegawai').show(300);
+        //             $('#button-tambah').hide();
+        //             $('#id').val(data.id);
+        //             $('#nm_pegawai').val(data.nm_pegawai);
+        //             $('#nip').val(data.nip);
+        //             $('#jenis_kelamin').val(data.jenis_kelamin);
+        //             $('#jabatan').val(data.jabatan);
+        //             $('#level_departemen').val(data.level_departemen);
+        //             $('#cabang').val(data.cabang);
+        //             $('#jenis_kepegawaian').val(data.jenis_kepegawaian);
+        //         },
+        //         error:function(){
+        //             alert("Nothing Data");
+        //         }
+        //     });
+        // }
 
         @if (count($errors) > 0)
             $('#modalverifikasi').modal('show');

@@ -44,9 +44,13 @@ class PegawaiController extends Controller
         return redirect()->route('admin.pegawais')->with(['success' =>  'Data pegawai baru sudah ditambahkan !!']);
     }
 
-    public function edit($id){
-        $pegawai = Pegawai::find($id);
-        return $pegawai;
+    // public function edit($id){
+    //     $pegawai = Pegawai::find($id);
+    //     return $pegawai;
+    // }
+
+    public function add(){
+        return view('admin/pegawais.add');
     }
 
 }

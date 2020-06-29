@@ -1,4 +1,4 @@
-<div id="form-pegawai" style="display: none;">
+<div id="form-pegawai">
     <hr style="width: 50%;">
     <input type="hidden" name="id" id="id">
     <div class="form-group col-md-6">
@@ -81,9 +81,9 @@
     </div>
 
     <div class="col-md-12 text-center">
-        <a onclick="batalkan()" class="btn btn-info btn-sm" style="color:white; cursor:pointer;"><i class="fa fa-arrow-left"></i>&nbsp; Tutup Form</a>
+        <hr style="width: 50%">
+        <a href="{{ route('admin.pegawais') }}" class="btn btn-info btn-sm" style="color:white; cursor:pointer;"><i class="fa fa-arrow-left"></i>&nbsp; Kembali</a>
         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-close"></i>&nbsp; Reset Data</button>
         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i>&nbsp; Simpan Data</button>
-        <hr style="width: 50%">
     </div>
 </div>
