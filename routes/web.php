@@ -32,6 +32,14 @@ Route::group(['prefix'  =>  'admin/pegawais'], function(){
     Route::post('/','PegawaiController@post')->name('admin.pegawais.post');
     Route::get('/{id}/edit','PegawaiController@edit')->name('admin.pegawais.edit');
 });
+Route::group(['prefix'  =>  'operator'], function(){
+    Route::get('/dashboard','OperatorDashboardController@index')->name('operator.dashboard');
+});
+
+Route::group(['prefix'  =>  'operator/pegawais'], function(){
+    Route::get('/','OperatorPegawaiController@index')->name('operator.pegawais');
+    Route::get('/detail/{pegawai:slug}','OperatorPegawaiController@show')->name('operator.pegawais.show');
+});
 
 Route::group(['prefix'  =>  'admin/pengajuans'], function(){
     Route::get('/','AdminPengajuanController@index')->name('admin.pengajuans');
