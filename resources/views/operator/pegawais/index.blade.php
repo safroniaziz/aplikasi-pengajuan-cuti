@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Jabatan')
-@section('login_as', 'Admin Universitas')
+@section('login_as', 'Operator Fakultas')
 @section('user-login')
     @if (Auth::check())
     {{ Auth::user()->nm_user }}
@@ -34,13 +34,15 @@
                             </div>
                             @else
                             <div class="alert alert-danger alert-block" id="keterangan">
-                                <strong><i class="fa fa-info-circle"></i>&nbsp;Perhatian: </strong> Berikut semua Jabatan yang tersedia, data berikut didapatkan dari Sistem Informasi Kepegawaian (SIMPEG), silahkan tambahkan manual jika diperlukan !!
+                                <strong><i class="fa fa-info-circle"></i>&nbsp;Perhatian: </strong> Berikut semua pegawai universitas bengkulu yang didapatkan dari Sistem Informasi Absensi Universitas Bengkulu, maupun yang ditambahkan oleh admin fakultas dan universitas. <br> Silahkan tambahkan data manual jika diperlukan !!
                             </div>
                     @endif
                 </div>
+                
                 <div class="col-md-12">
-                    <a onclick="tambahJabatan()" class="btn btn-primary btn-sm" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Jabatan</a>
+                    <a href="{{ route('admin.pegawais.add') }}" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Data Pegawai</a>
                 </div>
+
                 <div class="col-md-12">
                     <table class="table table-striped table-bordered" id="table" style="width:100%;">
                         <thead>
@@ -54,7 +56,8 @@
                                 <th>Level Departemen</th>
                                 <th>Cabang</th>
                                 <th>Jenis Kepegawaian</th>
-                                <th>Verifikasi</th>
+                                <th>Detail Pegawai</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,7 +76,10 @@
                                     <td> {{ $pegawai->cabang }} </td>
                                     <td> {{ $pegawai->jenis_kepegawaian }} </td>
                                     <td style="text-align: center">
-                                        <a href="{{ route('operator.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
+                                        <a href="{{ route('operator.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm pr-3 pl-3" style="color:white;cursor:pointer;"><i class="fa fa-info"></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-sm btn-info text-white" style="cursor: pointer;"> <i class="fa fa-edit"></i>&nbsp;</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -93,18 +99,60 @@
             });
         } );
 
-        function tambahJabatan(){
-            $('#form-jabatan').show(300);
-        }
+
+        // function tambah(){
+        //     $('#form-pegawai').show(300);
+        //     $('#id').val("");
+        //     $('#nm_pegawai').val("");
+        //     $('#nip').val("");
+        //     $('#jenis_kelamin').val("");
+        //     $('#jabatan').val("");
+        //     $('#level_departemen').val("");
+        //     $('#cabang').val("");
+        //     $('#jenis_kepegawaian').val("");
+        //     (['#jenis_kelamin','jenis_kepegawaian']).find('option[selected="selected"]').each(function(){
+        //         $(this).prop('selected', true);
+        //     });
+        // }
+
+        // function batalkan(){
+        //     $('#form-pegawai').hide(300);
+        // }
         
-        
-        function verifikasi(id){
-            $('#modalverifikasi').modal('show');
-            $('#id_hapus').val(id);
-        }
+        // function verifikasi(id){
+        //     $('#modalverifikasi').modal('show');
+        //     $('#id_hapus').val(id);
+        // }
+
+        // function edit(id){
+        //     $.ajax({
+        //         url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
+        //         type: "GET",
+        //         dataType: "JSON",
+        //         success: function(data){
+        //             $('#form-pegawai').show(300);
+        //             $('#button-tambah').hide();
+        //             $('#id').val(data.id);
+        //             $('#nm_pegawai').val(data.nm_pegawai);
+        //             $('#nip').val(data.nip);
+        //             $('#jenis_kelamin').val(data.jenis_kelamin);
+        //             $('#jabatan').val(data.jabatan);
+        //             $('#level_departemen').val(data.level_departemen);
+        //             $('#cabang').val(data.cabang);
+        //             $('#jenis_kepegawaian').val(data.jenis_kepegawaian);
+        //         },
+        //         error:function(){
+        //             alert("Nothing Data");
+        //         }
+        //     });
+        // }
 
         @if (count($errors) > 0)
             $('#modalverifikasi').modal('show');
+        @endif
+
+        @if (count($errors) > 0)
+            $('#form-pegawai').show();
         @endif
     </script>
 @endpush

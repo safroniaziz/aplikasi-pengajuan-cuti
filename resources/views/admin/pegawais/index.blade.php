@@ -99,6 +99,7 @@
             });
         } );
 
+
         // function tambah(){
         //     $('#form-pegawai').show(300);
         //     $('#id').val("");
