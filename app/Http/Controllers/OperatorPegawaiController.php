@@ -14,6 +14,6 @@ class OperatorPegawaiController extends Controller
 
     public function show(Pegawai $pegawai){
         $cutis = $pegawai->cutis()->get();
-        return view('admin/pegawais.show',compact('cutis','pegawai'));
+        return view('operator/pegawais.show',compact('cutis','pegawai'));
     }
 }

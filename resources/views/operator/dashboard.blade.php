@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Dashboard')
-@section('login_as', 'Tendik')
+@section('login_as', 'Operator Fakultas')
 @section('user-login')
     {{-- @if (Auth::guard('tendik')->check())
     {{ Auth::guard('tendik')->user()->nm_lengkap }}
