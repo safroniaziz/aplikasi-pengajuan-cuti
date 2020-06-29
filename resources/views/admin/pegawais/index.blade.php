@@ -40,17 +40,9 @@
                 </div>
                 
                 <div class="col-md-12">
-                    <a onclick="tambah()" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Jabatan</a>
+                    <a href="{{ route('admin.pegawais.add') }}" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Data Pegawai</a>
                 </div>
                 
-                <div class="col-md-12">
-                    @csrf
-                    <form action="{{ route('admin.pegawais.post') }}" method="POST">
-                        @csrf
-                        @include('admin/pegawais.form')
-                    </form>
-                </div>
-
                 <div class="col-md-12">
                     <table class="table table-striped table-bordered" id="table" style="width:100%;">
                         <thead>
@@ -107,52 +99,52 @@
             });
         } );
 
-        function tambah(){
-            $('#form-pegawai').show(300);
-            $('#id').val("");
-            $('#nm_pegawai').val("");
-            $('#nip').val("");
-            $('#jenis_kelamin').val("");
-            $('#jabatan').val("");
-            $('#level_departemen').val("");
-            $('#cabang').val("");
-            $('#jenis_kepegawaian').val("");
-            (['#jenis_kelamin','jenis_kepegawaian']).find('option[selected="selected"]').each(function(){
-                $(this).prop('selected', true);
-            });
-        }
+        // function tambah(){
+        //     $('#form-pegawai').show(300);
+        //     $('#id').val("");
+        //     $('#nm_pegawai').val("");
+        //     $('#nip').val("");
+        //     $('#jenis_kelamin').val("");
+        //     $('#jabatan').val("");
+        //     $('#level_departemen').val("");
+        //     $('#cabang').val("");
+        //     $('#jenis_kepegawaian').val("");
+        //     (['#jenis_kelamin','jenis_kepegawaian']).find('option[selected="selected"]').each(function(){
+        //         $(this).prop('selected', true);
+        //     });
+        // }
 
-        function batalkan(){
-            $('#form-pegawai').hide(300);
-        }
+        // function batalkan(){
+        //     $('#form-pegawai').hide(300);
+        // }
         
-        function verifikasi(id){
-            $('#modalverifikasi').modal('show');
-            $('#id_hapus').val(id);
-        }
+        // function verifikasi(id){
+        //     $('#modalverifikasi').modal('show');
+        //     $('#id_hapus').val(id);
+        // }
 
-        function edit(id){
-            $.ajax({
-                url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                    $('#form-pegawai').show(300);
-                    $('#button-tambah').hide();
-                    $('#id').val(data.id);
-                    $('#nm_pegawai').val(data.nm_pegawai);
-                    $('#nip').val(data.nip);
-                    $('#jenis_kelamin').val(data.jenis_kelamin);
-                    $('#jabatan').val(data.jabatan);
-                    $('#level_departemen').val(data.level_departemen);
-                    $('#cabang').val(data.cabang);
-                    $('#jenis_kepegawaian').val(data.jenis_kepegawaian);
-                },
-                error:function(){
-                    alert("Nothing Data");
-                }
-            });
-        }
+        // function edit(id){
+        //     $.ajax({
+        //         url: "{{ url('admin/pegawais') }}"+'/'+ id + "/edit",
+        //         type: "GET",
+        //         dataType: "JSON",
+        //         success: function(data){
+        //             $('#form-pegawai').show(300);
+        //             $('#button-tambah').hide();
+        //             $('#id').val(data.id);
+        //             $('#nm_pegawai').val(data.nm_pegawai);
+        //             $('#nip').val(data.nip);
+        //             $('#jenis_kelamin').val(data.jenis_kelamin);
+        //             $('#jabatan').val(data.jabatan);
+        //             $('#level_departemen').val(data.level_departemen);
+        //             $('#cabang').val(data.cabang);
+        //             $('#jenis_kepegawaian').val(data.jenis_kepegawaian);
+        //         },
+        //         error:function(){
+        //             alert("Nothing Data");
+        //         }
+        //     });
+        // }
 
         @if (count($errors) > 0)
             $('#modalverifikasi').modal('show');

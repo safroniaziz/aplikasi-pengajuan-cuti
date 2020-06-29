@@ -28,6 +28,7 @@ Route::group(['prefix'  =>  'admin'], function(){
 Route::group(['prefix'  =>  'admin/pegawais'], function(){
     Route::get('/','PegawaiController@index')->name('admin.pegawais');
     Route::get('/detail/{pegawai:slug}','PegawaiController@show')->name('admin.pegawais.show');
+    Route::get('/add','PegawaiController@add')->name('admin.pegawais.add');
     Route::post('/','PegawaiController@post')->name('admin.pegawais.post');
     Route::get('/{id}/edit','PegawaiController@edit')->name('admin.pegawais.edit');
 });
