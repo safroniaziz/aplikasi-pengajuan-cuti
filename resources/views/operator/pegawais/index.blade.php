@@ -12,7 +12,7 @@
     @endif
 @endsection
 @section('sidebar-menu')
-    @include('admin/sidebar')
+    @include('operator/sidebar')
 @endsection
 @section('content')
     <section class="panel" style="margin-bottom:20px;">
@@ -73,7 +73,7 @@
                                     <td> {{ $pegawai->cabang }} </td>
                                     <td> {{ $pegawai->jenis_kepegawaian }} </td>
                                     <td style="text-align: center">
-                                        <a href="{{ route('admin.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
+                                        <a href="{{ route('operator.pegawais.show',[$pegawai->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -92,7 +92,7 @@
                 responsive : true,
             });
         } );
-        
+
         function tambahJabatan(){
             $('#form-jabatan').show(300);
         }
