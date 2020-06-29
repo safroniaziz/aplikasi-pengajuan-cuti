@@ -73,7 +73,7 @@
                                     <td> {{ $ajuan->cabang }} </td>
                                     <td> {{ $ajuan->jenis_kepegawaian }} </td>
                                     <td style="text-align: center">
-                                        <a href="{{ route('admin.pengajuans.show',[$ajuan->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a>
+                                        {{-- <a href="{{ route('admin.pengajuans.show',[$ajuan->slug]) }}" class="btn btn-primary btn-sm" style="color:white;cursor:pointer;"><i class="fa fa-check-circle"></i></a> --}}
                                     </td>
                                 </tr>
                             @endforeach
