@@ -79,7 +79,7 @@
                 </div>
                 <div class="profile_info" style="padding-top:20px;">
                   <span style="color:#fff000; font-weight:bold;">@yield('login_as'),</span>
-                  <h2>
+                  <h2 class="text-uppercase">
                     @yield('user-login')
                   </h2>
                 </div>
@@ -114,25 +114,13 @@
                   <a id="menu_toggle" class="btn btn-success" style="background-color:#1c84c6; border-color:#1c84c6; color:#fff; margin:0 15px 5px 15px; border-radius:3px; padding:6px 12px; font-size:14px; font-weight:400; text-align:center;cursor:pointer; display:inline-block;"><i class="fa fa-bars" style="display:inline-block; font-size:inherit; text-rendering:auto;font: normal normal normal 14px/1 FontAwesome;"></i></a>
                 </div>
                 <nav class="nav navbar-nav">
-                <ul class=" navbar-right">
-                  <li class="nav-item dropdown open" style="padding-left: 15px;">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>&nbsp;
-                        @yield('user-login2')
-                    </a>
-                    <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                         <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            <i class="fa fa-power-off text-danger pull-right"></i>{{ __('Logout') }}
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </a>
-                    </div>
-                  </li>
-                </ul>
+                  <ul class=" navbar-right">
+                    <li class="nav-item" style="padding-left: 15px;">
+                      <a href="javascript:;" class="user-profile" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                          <strong class="text-uppercase">@yield('user-login2')</strong>
+                      </a>
+                    </li>
+                  </ul>
               </nav>
             </div>
           </div>

@@ -22,6 +22,7 @@ class CreatePegawaisTable extends Migration
             $table->string('jabatan');
             $table->string('departemen');
             $table->string('level_departemen');
+            $table->string('cabang_id');
             $table->string('cabang');
             $table->enum('jenis_kepegawaian',['dosen','tendik_pns','tendik_non_pns']);
             $table->timestamps();
