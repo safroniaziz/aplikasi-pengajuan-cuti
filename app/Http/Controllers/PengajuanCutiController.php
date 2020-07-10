@@ -18,7 +18,7 @@ class PengajuanCutiController extends Controller
         if (empty($data_dosen)) {
             return redirect()->route('pegawai.login.form')->with(['error'   =>  'Sesi login anda tidak ada/sudah habis !!']);
         }
-        $pengajuans = $data_dosen->cutis()->where('status','1')->orWhere('status','2')->get();
+        $pengajuans = $data_dosen->cutis()->where('status','1')->get();
         return view('pegawai/pengajuans.index',compact('data_dosen','pengajuans'));
     }
 
@@ -101,6 +101,15 @@ class PengajuanCutiController extends Controller
             DB::rollback();
             return redirect()->route('pegawai.pengajuans.new',[$dosen->slug])->with(['error' =>  'File pengajuan cuti gagal dikirimkan, silahkan cek koneksi internet anda atau coba lagi nanti !!']);
         }
+    }
+
+    public function menunggu(Request $request, Dosen $dosen){
+        $data_dosen =  Dosen::where('nip',Session::get('nip'))->first();
+        if (empty($data_dosen)) {
+            return redirect()->route('pegawai.login.form')->with(['error'   =>  'Sesi login anda tidak ada/sudah habis !!']);
+        }
+        $pengajuans = $data_dosen->cutis()->where('status','2')->get();
+        return view('pegawai/pengajuans.menunggu',compact('data_dosen','pengajuans'));
     }
 
     public function semuaPermohonan(Request $request, Dosen $dosen){

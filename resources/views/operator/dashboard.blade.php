@@ -2,14 +2,14 @@
 @section('title', 'Dashboard')
 @section('login_as', 'Operator Fakultas')
 @section('user-login')
-    {{-- @if (Auth::guard('tendik')->check())
-    {{ Auth::guard('tendik')->user()->nm_lengkap }}
-    @endif --}}
+    @if (Auth::guard('operator')->check())
+        {{ Auth::guard('operator')->user()->nm_operator }}
+    @endif
 @endsection
 @section('user-login2')
-    {{-- @if (Auth::guard('tendik')->check())
-    {{ Auth::guard('tendik')->user()->nm_lengkap }}
-    @endif --}}
+    @if (Auth::guard('operator')->check())
+        {{ Auth::guard('operator')->user()->nm_operator }}
+    @endif
 @endsection
 @section('sidebar-menu')
     @include('operator/sidebar')
@@ -39,9 +39,9 @@
                                 <!-- small box -->
                                 <div class="small-box bg-aqua" style="margin-bottom:0px;">
                                     <div class="inner">
-                                    <h3></h3>
+                                    <h3>{{ $today }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Potongan Absensi</p>
+                                    <p>Permohonan Baru (Hari Ini)</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-list"></i>
@@ -51,11 +51,25 @@
                             </div>
                             <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
                                 <!-- small box -->
+                                <div class="small-box bg-green" style="margin-bottom:0px;">
+                                    <div class="inner">
+                                    <h3>{{ $menunggu }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
+
+                                    <p>Permohonan Menunggu Verifikasi</p>
+                                    </div>
+                                    <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
+                                <!-- small box -->
                                 <div class="small-box bg-red" style="margin-bottom:0px;">
                                     <div class="inner">
-                                    <h3></h3>
+                                    <h3>{{ $total }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Potongan Integritas</p>
+                                    <p>Total Permohonan</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-list-alt"></i>
@@ -67,26 +81,12 @@
                                 <!-- small box -->
                                 <div class="small-box bg-yellow" style="margin-bottom:0px;">
                                     <div class="inner">
-                                    <h3></h3>
+                                    <h3>{{ $jumlah_dosen }} <a class="text-white" style="font-size: 20px;">Dosen</a></h3>
 
-                                    <p>Potongan SKP</p>
+                                    <p>Jumlah Dosen Mengajukan Permohonan</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-wpforms"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
-                                <!-- small box -->
-                                <div class="small-box bg-green" style="margin-bottom:0px;">
-                                    <div class="inner">
-                                    <h3></h3>
-
-                                    <p>Remunerasi Perbulan</p>
-                                    </div>
-                                    <div class="icon">
-                                    <i class="fa fa-calendar"></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
@@ -108,7 +108,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div  style="text-align:center;">
-                                    <strong>Selamat Datang di aplikasi pengajuan surat cuti pegawai <a href="https://www.unib.ac.id" target="_blank">Universitas Bengkulu</a>. Silahkan ajukan keperluan cuti anda, untuk mempermudah proses pengajuan anda silahkan bacalah buku panduan jika disediakan !!</strong>
+                                    <strong>Selamat Datang <b class="text-uppercase text-primary">{{ Auth::guard('operator')->user()->nm_operator }}</b> di halaman <b class="text-uppercase">operator fakultas</b> aplikasi pengajuan surat cuti pegawai <a href="https://www.unib.ac.id" target="_blank">Universitas Bengkulu</a>. Silahkan ajukan keperluan cuti anda, untuk mempermudah proses pengajuan anda silahkan bacalah buku panduan jika disediakan !!</strong>
                                     <p style="margin-bottom:0px;">Jangan lupa keluar setelah menggunkan aplikasi</p>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
             <div class="col-md-9" style="margin-bottom:5px;">
                 <section class="panel">
                     <header class="panel-heading" style="color: #ffffff;background-color: #074071;border-color: #fff000;border-image: none;border-style: solid solid none;border-width: 4px 0px 0;border-radius: 0;font-size: 14px;font-weight: 700;padding: 15px;">
-                        <i class="fa fa-user"></i>&nbsp;Informasi Pegawai Universitas Bengkulu
+                        <i class="fa fa-user"></i>&nbsp;Informasi Operator Universitas Bengkulu
                         <span class="tools pull-right" style="margin-top:-5px;">
                             <a class="fa fa-chevron-down" href="javascript:;" style="float: left;margin-left: 3px;padding: 10px;text-decoration: none;"></a>
                             <a class="fa fa-times" href="javascript:;" style="float: left;margin-left: 3px;padding: 10px;text-decoration: none;"></a>
@@ -128,15 +128,9 @@
                     <div class="panel-body" style="border-top: 1px solid #eee; padding:15px; background:white;">
                         <div class="row">
                             <div class="col-md-12" style="margin-bottom:5px;">
-                                @if (empty($about->nm_lengkap) || empty($about->nip) || empty($about->nm_jabatan) || empty($about->kelas_jabatan) || empty($about->golongan) || empty($about->jenis_kelamin) || empty($about->no_rekening) || empty($about->no_npwp))
-                                    <div class="alert alert-warning" role="alert">
-                                        <strong><i class="fa fa-info-circle"></i>&nbsp;Perhatian</strong> Harap untuk melengkapi data anda terlebih dahulu, silahkan tekan tombol <b>Edit Data</b>. Anda tidak dapat mengupload SKP jika data belum lengkap !!
-                                    </div>
-                                    @else
-                                    <div class="alert alert-success" role="alert">
-                                        <strong><i class="fa fa-check-circle"></i>&nbsp;Selamat</strong> Data anda sudah lengkap, silahkan tekan tombol <b>Edit Data</b> jika ada kesalahan data, anda sudah dapat mengupload SKP pada menu Rubrik SKP !!
-                                    </div>
-                                @endif
+                                <div class="alert alert-primary" role="alert">
+                                    <strong><i class="fa fa-info-circle"></i>&nbsp;Perhatian</strong> Data anda didapat dari  <b>Absensi UNIB(<a href="http://absensi.unib.ac.id" target="_blank">absensi.unib.ac.id</a>)</b>, jika terdapat kesalahan data, harap menghubungi bagian kepegawaian <b>Universitas Bengkulu</b> !!
+                                </div>
                                 @if ($error = Session::get('error'))
                                     <div class="alert alert-danger alert-block">
                                         <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -149,91 +143,45 @@
                                     </div>
                                 @endif
                             </div>
-                            {{-- @include('tendik.form_edit_data_tendik') --}}
-                            <div class="col-md-12" style="margin-bottom:5px;" id="button-data">
-                                <a onclick="editData()" class="btn btn-primary btn-sm" style="color: white; cursor: pointer;"><i class="fa fa-edit"></i>&nbsp; Edit Data</a>
-                                <a onclick="ubahPassword()" class="btn btn-danger btn-sm" style="color:white; cursor:pointer;"><i class="fa fa-key"></i>&nbsp; Ubah Password Login</a>
-                            </div>
                             <div class="col-md-12" id="table-data">
                                 <table class="table">
-                                    @if (!empty($about))
-                                        <tr>
-                                            <th>Nama Lengkap</th>
-                                            <td>:</td>
-                                            <td>{{ $about->nm_lengkap }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nomor Induk Pegawai</th>
-                                            <td>:</td>
-                                            <td>{{ $about->nip }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nama Jabatan</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->nm_jabatan))
-                                                    {{ $about->nm_jabatan }}
-                                                    @else
-                                                    <label class="badge badge-danger"><i class="fa fa-minus"></i></label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nama Jabatan</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->kelas_jabatan))
-                                                    {{ $about->kelas_jabatan }}
-                                                    @else
-                                                    <label class="badge badge-danger"><i class="fa fa-minus"></i></label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Golongan</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->golongan))
-                                                    {{ $about->golongan }}
-                                                    @else
-                                                    <label class="badge badge-danger"><i class="fa fa-minus"></i></label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Jenis Kelamin</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->jenis_kelamin))
-                                                    <label class="badge badge-primary"><i class="fa fa-male"></i>&nbsp; Laki-Laki</label>
-                                                    @else
-                                                    <label class="badge badge-success"><i class="fa fa-female"></i>&nbsp; Perempuan</label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nomor Rekening</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->no_rekening))
-                                                    {{ $about->no_rekening }}
-                                                    @else
-                                                    <label class="badge badge-danger"><i class="fa fa-minus"></i></label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nomor NPWP</th>
-                                            <td>:</td>
-                                            <td>
-                                                @if (!empty($about->no_npwp))
-                                                    {{ $about->no_npwp }}
-                                                    @else
-                                                    <label class="badge badge-danger"><i class="fa fa-minus"></i></label>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endif
+                                    <tr>
+                                        <th>Nama Lengkap</th>
+                                        <td>:</td>
+                                        <td>{{ $operator->nm_operator }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nomor Induk Pegawai</th>
+                                        <td>:</td>
+                                        <td>{{ $operator->nip }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Departemen</th>
+                                        <td>:</td>
+                                        <td>{{ $operator->dept_nama }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jeis Kepegawaian</th>
+                                        <td>:</td>
+                                        <td>
+                                            @if ($operator->jenis_kepegawaian == "tendik")
+                                                Tendik
+                                                @else
+                                                Tendik PNS
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Kelamin</th>
+                                        <td>:</td>
+                                        <td>
+                                            @if ($operator->jenis_kelamin == "1")
+                                                <label class="badge badge-primary"><i class="fa fa-male"></i>&nbsp; Laki-laki</label>
+                                                @else
+                                                <label class="badge badge-success"><i class="fa fa-female"></i>&nbsp; Perempuan</label>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>

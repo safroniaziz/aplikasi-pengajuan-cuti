@@ -28,7 +28,21 @@
                                     <div class="inner">
                                     <h3>{{ $jumlah }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Jumlah Pengajuan Cuti</p>
+                                    <p>Jumlah permohonan pengajuan Cuti</p>
+                                    </div>
+                                    <div class="icon">
+                                    <i class="fa fa-list"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
+                                <!-- small box -->
+                                <div class="small-box bg-aqua" style="margin-bottom:0px;">
+                                    <div class="inner">
+                                    <h3>{{ $sisa }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
+
+                                    <p>Sisa Permohonan Cuti</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-list"></i>
@@ -42,7 +56,7 @@
                                     <div class="inner">
                                     <h3>{{ $menunggu }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Pengajuan Cuti Menunggu Verifikasi</p>
+                                    <p>permohonan pengajuan Cuti Menunggu Verifikasi</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-calendar"></i>
@@ -52,11 +66,11 @@
                             </div>
                             <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
                                 <!-- small box -->
-                                <div class="small-box bg-red" style="margin-bottom:0px;">
+                                <div class="small-box bg-success text-white" style="margin-bottom:0px;">
                                     <div class="inner">
                                     <h3>{{ $diterima }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Pengajuan Cuti Diterima</p>
+                                    <p>permohonan pengajuan Cuti Diterima</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-list-alt"></i>
@@ -66,11 +80,11 @@
                             </div>
                             <div class="col-lg-12 col-xs-12 col-md-12" style="padding-bottom:10px !important;">
                                 <!-- small box -->
-                                <div class="small-box bg-yellow" style="margin-bottom:0px;">
+                                <div class="small-box bg-danger text-white" style="margin-bottom:0px;">
                                     <div class="inner">
                                     <h3>{{ $ditolak }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Pengajuan Cuti Tidak Diterima</p>
+                                    <p>permohonan pengajuan Cuti Tidak Diterima</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-wpforms"></i>
@@ -84,7 +98,7 @@
                                     <div class="inner">
                                     <h3>{{ $diteruskan }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Pengajuan Diteruskan ke Admin Universitas</p>
+                                    <p>permohonan pengajuan Diteruskan ke Admin Universitas</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-wpforms"></i>
@@ -98,7 +112,7 @@
                                     <div class="inner">
                                     <h3>{{ $tidak_diteruskan }} <a class="text-white" style="font-size: 20px;">Permohonan</a></h3>
 
-                                    <p>Pengajuan Ditolak Operator Fakultas</p>
+                                    <p>permohonan pengajuan Ditolak Operator Fakultas</p>
                                     </div>
                                     <div class="icon">
                                     <i class="fa fa-wpforms"></i>
@@ -123,7 +137,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div  style="text-align:center;">
-                                    <strong>Selamat Datang di aplikasi pengajuan surat cuti pegawai <a href="https://www.unib.ac.id" target="_blank">Universitas Bengkulu</a>. Silahkan ajukan keperluan cuti anda, untuk mempermudah proses pengajuan anda silahkan bacalah buku panduan jika disediakan !!</strong>
+                                    <strong>Selamat Datang <b class="text-uppercase text-primary">{{ $data_pegawai['gelar_depan'] .$data_pegawai['nm_dosen'] .' '.$data_pegawai['gelar_belakang'] }}</b> di aplikasi permohonan pengajuan surat cuti pegawai <a href="https://www.unib.ac.id" target="_blank">Universitas Bengkulu</a>. Silahkan ajukan keperluan cuti anda, untuk mempermudah proses pengajuan anda silahkan bacalah buku panduan jika disediakan !!</strong>
                                     <p class="text-danger mb-0">Penting, Jangan lupa keluar setelah menggunkan aplikasi</p>
                                 </div>
                             </div>
@@ -196,18 +210,6 @@
     <script>
         function ubahPassword(){
             $('#modalUbahPassword').modal('show');
-        }
-
-        function editData(){
-            $('#form-edit').show(300);
-            $('#table-data').hide(300);
-            $('#button-data').hide(300);
-        }
-
-        function batalkanEdit(){
-            $('#form-edit').hide(300);
-            $('#table-data').show(300);
-            $('#button-data').show(300);
         }
     </script>
 @endpush

@@ -37,7 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','logoutOperator');
     }
 
     public function showOperatorLoginForm()
@@ -62,5 +62,10 @@ class LoginController extends Controller
     public function username()
     {
         return 'username';
+    }
+
+    public function logoutOperator(){
+        Auth::guard('operator')->logout();
+        return redirect()->route('operator.login')->with(['success' =>  'Anda Berhasil Logout']);
     }
 }

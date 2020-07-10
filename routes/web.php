@@ -52,6 +52,7 @@ Route::group(['prefix'  =>  'pegawai'], function(){
     */
     Route::get('/{dosen:slug}/permohonans','PengajuanCutiController@index')->name('pegawai.pengajuans.new');
     Route::get('/{dosen:slug}/permohonans/tambah_pengajuan','PengajuanCutiController@add')->name('pegawai.pengajuans.add');
+    Route::get('/{dosen:slug}/permohonans/menunggu','PengajuanCutiController@menunggu')->name('pegawai.pengajuans.menunggu');
     Route::post('/{dosen:slug}/permohonans/post','PengajuanCutiController@post')->name('pegawai.pengajuans.new.post');
     Route::get('/{dosen:slug}/permohonans/{pivot_id}/edit','PengajuanCutiController@edit')->name('pegawai.pengajuans.new.edit');
     Route::patch('/{dosen:slug}/permohonans/{pivot_id}/update','PengajuanCutiController@update')->name('pegawai.pengajuans.new.update');
@@ -93,12 +94,44 @@ Route::group(['prefix'  =>  'admin'], function(){
     */
     Route::get('/riwayat/permohonan_disetujui','AdminPermohonanController@riwayatDosenDisetujui')->name('admin.riwayat.dosens.disetujui');
     Route::get('/riwayat/permohonan_tidak_disetujui','AdminPermohonanController@riwayatDosenTidakDisetujui')->name('admin.riwayat.dosens.ditolak');
+
+     /*
+        Route untuk verifikasi permohonan oleh operator fakultas
+    */
+    Route::get('/verifikasi','AdminVerifikasiController@verifikasiDosen')->name('admin.verifikasi.dosens');
+    Route::get('/verifikasi/{dosen:slug}/{cuti_dosen}','AdminVerifikasiController@verifikasiDosenDetail')->name('admin.verifikasi.dosens.detail');
+    Route::patch('/verifikasi/{dosen:slug}/{cuti_dosen}','AdminVerifikasiController@verifikasiDosenUpdate')->name('admin.verifikasi.dosens.update');
+
+    /*
+        Route untuk riwayat verifikasi dari fakultas
+    */
+    Route::get('/riwayat','OperatorRiwayatController@riwayatDosenDisetujui')->name('operator.riwayat.dosens');
+
+    /*
+        Route untuk melihat semua permohonan berdasarkan status
+    */
+    Route::get('/permohonans/belum_diajukan','OperatorPermohonanController@belumDIajukan')->name('operator.permohonans.belum_diajukan');
+    Route::get('/permohonans/menunggu_verifikasi','OperatorPermohonanController@menungguVerifikasi')->name('operator.permohonans.menunggu_verifikasi');
+    Route::get('/permohonans/dilanjutkan','OperatorPermohonanController@dilanjutkan')->name('operator.permohonans.dilanjutkan');
+    Route::get('/permohonans/tidak_dilanjutkan','OperatorPermohonanController@tidakDilanjutkan')->name('operator.permohonans.tidak_dilanjutkan');
+    Route::get('/permohonans/disetujui','OperatorPermohonanController@disetujui')->name('operator.permohonans.disetujui');
+    Route::get('/permohonans/tidak_disetujui','OperatorPermohonanController@tidakDisetujui')->name('operator.permohonans.tidak_disetujui');
+
+    /*
+        Route untuk melihat semua dosen pemohon
+    */
+    Route::group(['prefix'  =>  'operator/pemohons'], function(){
+        Route::get('/','OperatorDosenPemohonController@index')->name('operator.pemohons.dosen');
+        Route::get('/detail/{dosen:slug}','OperatorDosenPemohonController@show')->name('operator.pemohons.dosen.show');
+        Route::patch('/{dosen:id}/verifikasi','OperatorDosenPemohonController@verifikasi')->name('admin.pemohons.dosen.verifikasi');
+    });
 });
 
 Route::group(['prefix'  =>  'operator'], function(){
     Route::get('/login','Auth\LoginController@showOperatorLoginForm');
     Route::post('/login','Auth\LoginController@operatorLogin')->name('operator.login');
     Route::get('/dashboard','AdminDashboardController@index')->name('operator.dashboard');
+    Route::get('/logout','Auth\LoginController@logoutOperator')->name('operator.logout');
 
     /*
         Route untuk verifikasi permohonan oleh operator fakultas
@@ -112,6 +145,24 @@ Route::group(['prefix'  =>  'operator'], function(){
     */
     Route::get('/riwayat','OperatorRiwayatController@riwayatDosenDisetujui')->name('operator.riwayat.dosens');
 
+    /*
+        Route untuk melihat semua permohonan berdasarkan status
+    */
+    Route::get('/permohonans/belum_diajukan','OperatorPermohonanController@belumDIajukan')->name('operator.permohonans.belum_diajukan');
+    Route::get('/permohonans/menunggu_verifikasi','OperatorPermohonanController@menungguVerifikasi')->name('operator.permohonans.menunggu_verifikasi');
+    Route::get('/permohonans/dilanjutkan','OperatorPermohonanController@dilanjutkan')->name('operator.permohonans.dilanjutkan');
+    Route::get('/permohonans/tidak_dilanjutkan','OperatorPermohonanController@tidakDilanjutkan')->name('operator.permohonans.tidak_dilanjutkan');
+    Route::get('/permohonans/disetujui','OperatorPermohonanController@disetujui')->name('operator.permohonans.disetujui');
+    Route::get('/permohonans/tidak_disetujui','OperatorPermohonanController@tidakDisetujui')->name('operator.permohonans.tidak_disetujui');
+
+    /*
+        Route untuk melihat semua dosen pemohon
+    */
+    Route::group(['prefix'  =>  'operator/pemohons'], function(){
+        Route::get('/','OperatorDosenPemohonController@index')->name('operator.pemohons.dosen');
+        Route::get('/detail/{dosen:slug}','OperatorDosenPemohonController@show')->name('operator.pemohons.dosen.show');
+        Route::patch('/{dosen:id}/verifikasi','OperatorDosenPemohonController@verifikasi')->name('admin.pemohons.dosen.verifikasi');
+    });
 });
 
 Route::group(['prefix'  =>  'admin/pegawais','middleware'   =>  'auth:operator'], function(){
@@ -133,7 +184,6 @@ Route::group(['prefix'  =>  'admin/operators'], function(){
     Route::patch('/{pegawai:slug}/update','OperatorFakultasController@update')->name('admin.operators.update');
     Route::delete('/{pegawai:slug}/delete','OperatorFakultasController@delete')->name('admin.operators.delete');
 });
-
 
 
 Route::group(['prefix'  =>  'operator'], function(){

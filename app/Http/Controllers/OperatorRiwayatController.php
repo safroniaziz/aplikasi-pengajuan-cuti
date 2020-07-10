@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class OperatorRiwayatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:operator');
+    }
+    
     public function riwayatDosenDisetujui(){
         $riwayats = DB::table('cuti_dosen')
                     ->join('dosens','dosens.id','cuti_dosen.dosen_id')

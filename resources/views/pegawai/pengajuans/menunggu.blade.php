@@ -2,13 +2,16 @@
 @section('title', 'Manajemen Jabatan')
 @section('login_as', 'Pegawai')
 @section('user-login')
-    {{ Auth::user()->nm_user }}
+    {{ $data_dosen['gelar_depan'] .$data_dosen['nm_dosen'] .' '.$data_dosen['gelar_belakang'] }}
 @endsection
 @section('user-login2')
-    {{ Auth::user()->nm_user }}
+    {{ $data_dosen['gelar_depan'] .$data_dosen['nm_dosen'] .' '.$data_dosen['gelar_belakang'] }}
 @endsection
 @section('sidebar-menu')
-    @include('operator/sidebar')
+    @include('pegawai/sidebar')
+@endsection
+@section('sidebar-menu')
+    @include('pegawai/sidebar')
 @endsection
 @section('content')
     <section class="panel" style="margin-bottom:20px;">
@@ -40,6 +43,11 @@
                             @endif
                     @endif
                 </div>
+                
+                <div class="col-md-12">
+                    <a href="{{ route('pegawai.pengajuans.add',[$data_dosen['slug']]) }}" class="btn btn-primary btn-sm" id="button-tambah" style="color:white; cursor:pointer;"><i class="fa fa-briefcase"></i>&nbsp; Tambah Pengajuan Cuti</a>
+                </div>
+
                 <div class="col-md-12">
                     <table class="table table-striped table-bordered" id="table" style="width:100%;">
                         <thead>
@@ -52,7 +60,7 @@
                                 <th>Tanggal Akhir</th>
                                 <th>Keterangan</th>
                                 <th>File Permohonan</th>
-                                <th>Verifikasi</th>
+                                <th>Status Permohonan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,17 +70,25 @@
                             @foreach ($pengajuans as $pengajuan)
                                 <tr>
                                     <td> {{ $no++ }} </td>
-                                    <td> {{ $pengajuan->gelar_depan }}{{ $pengajuan->nm_dosen }} {{ $pengajuan->gelar_belakang }} </td>
-                                    <td> {{ $pengajuan->nip }} </td>
+                                    <td> {{ $data_dosen['gelar_depan'] }}{{ $data_dosen['nm_dosen'] }} {{ $data_dosen['gelar_belakang'] }} </td>
+                                    <td> {{ $data_dosen['nip'] }} </td>
                                     <td> {{ $pengajuan->jenis_cuti }} </td>
-                                    <td> {{ Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('d F, Y') }} </td>
-                                    <td> {{ Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('d F, Y') }} </td>
-                                    <td> {{ $pengajuan->keterangan }} </td>
+                                    <td> {{ Carbon\Carbon::parse($pengajuan['pivot']->tanggal_awal)->format('d F, Y') }} </td>
+                                    <td> {{ Carbon\Carbon::parse($pengajuan['pivot']->tanggal_akhir)->format('d F, Y') }} </td>
+                                    <td> {{ $pengajuan['pivot']->keterangan }} </td>
                                     <td class="text-center">
-                                        <a href="{{ asset('storage/'.$pengajuan->file_ajuan) }}" download="{{ $pengajuan->file_ajuan }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i></a>
+                                        <a href="{{ asset('storage/'.$pengajuan['pivot']->file_ajuan) }}" download="{{ $pengajuan['pivot']->file_ajuan }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i></a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.verifikasi.dosens.detail',[$pengajuan->dosen_slug,$pengajuan->cuti_dosen_id]) }}" class="btn btn-primary btn-sm text-white" style="cursor: pointer"><i class="fa fa-check-circle"></i></a>
+                                        @if ($pengajuan['pivot']->status == "1")
+                                            <span class="badge badge-warning"><i class="fa fa-clock-o"></i>&nbsp; Belum dikirim</span>
+                                            <hr class="mt-2 mb-2">
+                                            <a href="{{ route('pegawai.pengajuan.send',[$data_dosen['slug'],$pengajuan['pivot']['id']]) }}" class="btn btn-primary btn-sm"><i class="fa fa-send-o"></i>&nbsp; kirimkan</a>
+                                            @elseif($pengajuan['pivot']->status == "2") 
+                                            <span class="badge badge-info"><i class="fa fa-clock-o"></i>&nbsp; Menunggu verifikasi fakultas</span>
+                                            <hr class="mt-2 mb-2">
+                                            <a class="btn btn-primary btn-sm disabled text-white"><i class="fa fa-send-o"></i>&nbsp; kirimkan</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

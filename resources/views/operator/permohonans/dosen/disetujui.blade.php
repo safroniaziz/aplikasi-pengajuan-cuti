@@ -2,10 +2,10 @@
 @section('title', 'Manajemen Jabatan')
 @section('login_as', 'Pegawai')
 @section('user-login')
-    {{ Auth::user()->nm_user }}
+    {{ Auth::guard('operator')->user()->nm_operator }}
 @endsection
 @section('user-login2')
-    {{ Auth::user()->nm_user }}
+    {{ Auth::guard('operator')->user()->nm_operator }}
 @endsection
 @section('sidebar-menu')
     @include('operator/sidebar')
@@ -29,7 +29,7 @@
                                 <strong>Gagal :</strong> {{ $message }}
                             </div>
                             @else
-                            @if (count($pengajuans)>0)
+                            @if (count($permohonans)>0)
                                 <div class="alert alert-primary alert-block" id="keterangan">
                                     <strong><i class="fa fa-info-circle"></i>&nbsp;Perhatian: </strong> Data yang ditampilkan dibawah ini adalah data pengajuan pegawai yang sedang menunggu/dalam proses verifikasi oleh operator fakultas !!
                                 </div>
@@ -52,27 +52,29 @@
                                 <th>Tanggal Akhir</th>
                                 <th>Keterangan</th>
                                 <th>File Permohonan</th>
-                                <th>Verifikasi</th>
+                                <th>Status Permohonan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
                                 $no=1;
                             @endphp
-                            @foreach ($pengajuans as $pengajuan)
+                            @foreach ($permohonans as $permohonan)
                                 <tr>
                                     <td> {{ $no++ }} </td>
-                                    <td> {{ $pengajuan->gelar_depan }}{{ $pengajuan->nm_dosen }} {{ $pengajuan->gelar_belakang }} </td>
-                                    <td> {{ $pengajuan->nip }} </td>
-                                    <td> {{ $pengajuan->jenis_cuti }} </td>
-                                    <td> {{ Carbon\Carbon::parse($pengajuan->tanggal_awal)->format('d F, Y') }} </td>
-                                    <td> {{ Carbon\Carbon::parse($pengajuan->tanggal_akhir)->format('d F, Y') }} </td>
-                                    <td> {{ $pengajuan->keterangan }} </td>
+                                    <td> {{ $permohonan->gelar_depan }}{{ $permohonan->nm_dosen }} {{ $permohonan->gelar_belakang }} </td>
+                                    <td> {{ $permohonan->nip }} </td>
+                                    <td> {{ $permohonan->jenis_cuti }} </td>
+                                    <td> {{ Carbon\Carbon::parse($permohonan->tanggal_awal)->format('d F, Y') }} </td>
+                                    <td> {{ Carbon\Carbon::parse($permohonan->tanggal_akhir)->format('d F, Y') }} </td>
+                                    <td> {{ $permohonan->keterangan }} </td>
                                     <td class="text-center">
-                                        <a href="{{ asset('storage/'.$pengajuan->file_ajuan) }}" download="{{ $pengajuan->file_ajuan }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i></a>
+                                        <a href="{{ asset('storage/'.$permohonan->file_ajuan) }}" download="{{ $permohonan->file_ajuan }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i></a>
                                     </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('admin.verifikasi.dosens.detail',[$pengajuan->dosen_slug,$pengajuan->cuti_dosen_id]) }}" class="btn btn-primary btn-sm text-white" style="cursor: pointer"><i class="fa fa-check-circle"></i></a>
+                                    <td>
+                                        @if ($permohonan->status == "5")
+                                            <span class="badge badge-success"><i class="fa fa-check-circle"></i>&nbsp; Permohonan Disetujui</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

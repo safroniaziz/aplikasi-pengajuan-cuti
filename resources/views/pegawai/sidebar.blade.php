@@ -6,8 +6,12 @@
     {{-- <a href=" {{ route('pegawai.pegawais') }} "><i class="fa fa-users"></i>Daftar Pegawai Terdaftar</a> --}}
 </li>
 
-<li>
-    <a href=" {{ route('pegawai.pengajuans.new',[Session::get('slug')]) }} "><i class="fa fa-arrow-circle-o-right "></i>Permohonan Pengajuan Cuti</a>
+<li><a><i class="fa fa-arrow-circle-o-right"></i>Permohonan Cuti<span class="fa fa-chevron-down" ></span></a>
+    <ul class="nav child_menu">
+        <li><a href=" {{ route('pegawai.pengajuans.new',[Session::get('slug')]) }} ">Permohonan Baru</a></li>
+        <li><a href=" {{ route('pegawai.pengajuans.menunggu',[Session::get('slug')]) }} ">Menunggu Verifikasi Fakultas</a></li>
+        {{-- <li><a href=" {{ route('pegawai.pengajuans.new.ditolak_fakultas',[Session::get('slug')]) }} ">Permohonan Tidak Dilanjutkan</a></li> --}}
+    </ul>
 </li>
 
 <li><a><i class="fa fa-check-circle"></i>Verifikasi Fakultas<span class="fa fa-chevron-down" ></span></a>
